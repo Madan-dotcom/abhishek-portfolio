@@ -13,7 +13,7 @@ export default function Navbar() {
    const [menuOpen, setMenuOpen] = useState(false);
 
    return (
-      <nav className='w-full bg-black/80 backdrop-blur-md text-white fixed top-8 left-0 z-50'>
+      <nav className='w-full  text-white fixed top-8 left-0 z-50'>
          <div className='max-w-7xl mx-auto flex justify-between items-center px-4 py-3'>
             {/* Logo */}
             <Link href='/' className={`${greatVibes.className} text-4xl md:text-5xl text-amber-300 leading-none`}>
