@@ -6,7 +6,7 @@ function App() {
          <body>
             <div className=' min-h-screen flex justify-center items-center'>
                <h1 class='text-3xl font-bold '>
-                  Hello <br /> Ahbishek Reddy!
+                  Hello Ahbishek Reddy!
                </h1>
                <div>
                   <h1>He his a professional video editor</h1>
