@@ -3,7 +3,7 @@ import logo from "../assets/images/Abhishek.png";
 
 const Navbar = () => {
    const [isMenuOpen, setIsMenuOpen] = useState(false);
-
+   const [activeMenu, setActiveMenu] = useState("");
    const closeMenu = () => {
       setIsMenuOpen(false);
    };
@@ -30,7 +30,8 @@ const Navbar = () => {
                <li>
                   <a
                      href='#work'
-                     className='transition-colors  duration-500 hover:text-[#c2ae5e] font-mono tracking-wide relative inline-block after:absolute after:left-0 after:-bottom-1 after:h-[1px] after:w-0 after:bg-yellow-300 after:transition-all after:duration-500 after:ease-out hover:after:w-full '
+                     className='transition-colors  duration-500 hover:text-[#c2ae5e] font-mono tracking-wide relative inline-block after:absolute after:left-0
+                      after:-bottom-1 after:h-[1px] after:w-0 after:bg-yellow-300 after:transition-all after:duration-500 after:ease-out hover:after:w-full '
                   >
                      WORK
                   </a>
@@ -39,7 +40,8 @@ const Navbar = () => {
                <li>
                   <a
                      href='#about'
-                     className='transition-colors  duration-500 hover:text-[#c2ae5e] font-mono tracking-wide relative inline-block after:absolute after:left-0 after:-bottom-1 after:h-[1px] after:w-0 after:bg-yellow-300 after:transition-all after:duration-500 after:ease-out hover:after:w-full '
+                     className='transition-colors  duration-500 hover:text-[#c2ae5e] font-mono tracking-wide relative inline-block after:absolute after:left-0 
+                     after:-bottom-1 after:h-[1px] after:w-0 after:bg-yellow-300 after:transition-all after:duration-500 after:ease-out hover:after:w-full '
                   >
                      ABOUT
                   </a>
@@ -48,7 +50,8 @@ const Navbar = () => {
                <li>
                   <a
                      href='#contact'
-                     className='transition-colors  duration-500 hover:text-[#c2ae5e] font-mono tracking-wide relative inline-block after:absolute after:left-0 after:-bottom-1 after:h-[1px] after:w-0 after:bg-yellow-300 after:transition-all after:duration-500 after:ease-out hover:after:w-full '
+                     className='transition-colors  duration-500 hover:text-[#c2ae5e] font-mono tracking-wide relative inline-block after:absolute after:left-0 
+                     after:-bottom-1 after:h-[1px] after:w-0 after:bg-yellow-300 after:transition-all after:duration-500 after:ease-out hover:after:w-full '
                   >
                      CONTACT
                   </a>
@@ -66,48 +69,92 @@ const Navbar = () => {
                {isMenuOpen ? "✕" : "☰"}
             </button>
          </div>
+
          {/* Mobile Navigation */}
          {isMenuOpen && (
             <div className='md:hidden border-t border-white/10 px-6 py-6'>
-               <ul className='flex flex-col items-center justify-center gap-6 text-sm text-[#f6c400]'>
+               <ul className='flex flex-col items-center justify-center gap-6 text-sm'>
+                  {/* SHOWREEL */}
                   <li>
                      <a
                         href='#showreel'
-                        onClick={closeMenu}
-                        className='group relative inline-block font-mono tracking-wide transition-colors duration-500 hover:text-[#c2ae5e]'
+                        onClick={() => {
+                           setActiveMenu("showreel");
+                           closeMenu();
+                        }}
+                        className={`relative inline-block font-mono tracking-wide transition-colors duration-500 ${
+                           activeMenu === "showreel" ? "text-[#c2ae5e]" : "text-[#f6c400]"
+                        }`}
                      >
                         SHOWREEL
-                        <span className='absolute left-0 -bottom-1 h-[1px] w-0 bg-yellow-300 transition-all duration-500 ease-out group-hover:w-full'></span>
+                        <span
+                           className={`absolute left-0 -bottom-1 h-[1px] bg-yellow-300 transition-all duration-500 ease-out ${
+                              activeMenu === "showreel" ? "w-full" : "w-0"
+                           }`}
+                        ></span>
                      </a>
                   </li>
 
+                  {/* WORK */}
                   <li>
                      <a
                         href='#work'
-                        onClick={closeMenu}
-                        className='font-mono tracking-wide transition-colors duration-500 hover:text-[#c2ae5e]'
+                        onClick={() => {
+                           setActiveMenu("work");
+                           closeMenu();
+                        }}
+                        className={`relative inline-block font-mono tracking-wide transition-colors duration-500 ${
+                           activeMenu === "work" ? "text-[#c2ae5e]" : "text-[#f6c400]"
+                        }`}
                      >
                         WORK
+                        <span
+                           className={`absolute left-0 -bottom-1 h-[1px] bg-yellow-300 transition-all duration-500 ease-out ${
+                              activeMenu === "work" ? "w-full" : "w-0"
+                           }`}
+                        ></span>
                      </a>
                   </li>
 
+                  {/* ABOUT */}
                   <li>
                      <a
                         href='#about'
-                        onClick={closeMenu}
-                        className='font-mono tracking-wide transition-colors duration-500 hover:text-[#c2ae5e]'
+                        onClick={() => {
+                           setActiveMenu("about");
+                           closeMenu();
+                        }}
+                        className={`relative inline-block font-mono tracking-wide transition-colors duration-500 ${
+                           activeMenu === "about" ? "text-[#c2ae5e]" : "text-[#f6c400]"
+                        }`}
                      >
                         ABOUT
+                        <span
+                           className={`absolute left-0 -bottom-1 h-[1px] bg-yellow-300 transition-all duration-500 ease-out ${
+                              activeMenu === "about" ? "w-full" : "w-0"
+                           }`}
+                        ></span>
                      </a>
                   </li>
 
+                  {/* CONTACT */}
                   <li>
                      <a
                         href='#contact'
-                        onClick={closeMenu}
-                        className='font-mono tracking-wide transition-colors duration-500 hover:text-[#c2ae5e]'
+                        onClick={() => {
+                           setActiveMenu("contact");
+                           closeMenu();
+                        }}
+                        className={`relative inline-block font-mono tracking-wide transition-colors duration-500 ${
+                           activeMenu === "contact" ? "text-[#c2ae5e]" : "text-[#f6c400]"
+                        }`}
                      >
                         CONTACT
+                        <span
+                           className={`absolute left-0 -bottom-1 h-[1px] bg-yellow-300 transition-all duration-500 ease-out ${
+                              activeMenu === "contact" ? "w-full" : "w-0"
+                           }`}
+                        ></span>
                      </a>
                   </li>
                </ul>
