@@ -1,97 +1,83 @@
-const Hero = () => {
+const display = { fontFamily: "'Playfair Display', Georgia, serif" };
+const sans = { fontFamily: "'DM Sans', system-ui, sans-serif" };
+const mono = { fontFamily: "'Space Mono', ui-monospace, monospace" };
+
+export default function Hero() {
    return (
-      <section id='showreel' className='relative min-h-screen overflow-hidden bg-[#0C0C0C] text-white'>
-         {/* Hero Container */}
-         <div className='relative mx-auto flex min-h-screen w-full max-w-[1600px] items-center px-6 pb-16 pt-32 sm:px-10 sm:pt-36 lg:px-16 lg:pt-32'>
-            <div className='grid w-full grid-cols-1 items-center gap-14 lg:grid-cols-2 lg:gap-16'>
-               {/* Left Content */}
-               <div className='max-w-2xl'>
-                  {/* Eyebrow */}
-                  <p className='mb-6 font-mono text-[10px] font-medium uppercase tracking-[0.3em] text-[#f6c400] sm:text-xs'>
-                     Visual Storyteller & Video Editor
-                  </p>
+      <section className='relative min-h-screen w-full overflow-hidden bg-[#0a0a0a] text-[#f0ede6]'>
+         <div className='mx-auto grid min-h-screen max-w-[1920px] grid-cols-1 items-center gap-12 px-6 py-16 sm:px-10 lg:grid-cols-2 lg:gap-0 lg:px-0 lg:py-0'>
+            {/* LEFT */}
+            <div className='lg:pl-[7vw] lg:pr-8'>
+               <p style={mono} className='mb-6 text-[11px] uppercase tracking-[0.3em] text-[#e8c872] sm:text-xs'>
+                  Visual Storyteller &amp; Video Editor
+               </p>
 
-                  {/* Main Heading */}
-                  <h1 className='font-serif text-[clamp(4rem,8vw,7.5rem)] leading-[0.82] tracking-[-0.05em]'>
-                     <span className='block text-[#f5f3ed]'>Abhishek</span>
+               <h1
+                  style={display}
+                  className='text-[clamp(3.5rem,13vw,4.5rem)] font-extrabold leading-[0.92] tracking-[-0.02em] sm:text-[clamp(4rem,10vw,6rem)] lg:text-[clamp(4rem,6vw,7rem)]'
+               >
+                  <span className='block text-[#f0ede6]'>Abhishek</span>
+                  <span className='block italic text-[#e8c872]'>Crafts</span>
+                  <span className='block italic text-[#e8c872]'>Motion.</span>
+               </h1>
 
-                     <span className='block italic text-[#f0ca68]'>Crafts</span>
+               <p style={sans} className='mt-10 max-w-[440px] text-base leading-[1.95] text-[#8a8780] sm:text-[17px]'>
+                  Transforming raw footage into compelling narratives — from cinematic brand films to high-energy reels, every cut tells a
+                  story.
+               </p>
 
-                     <span className='block italic text-[#f0ca68]'>Motion.</span>
-                  </h1>
-
-                  {/* Description */}
-                  <p className='mt-8 max-w-xl text-sm leading-7 text-white/45 sm:text-base sm:leading-8'>
-                     Transforming raw footage into compelling narratives
-                     <br className='hidden sm:block' />
-                     — from cinematic brand films to high-energy reels,
-                     <br className='hidden sm:block' />
-                     every cut tells a story.
-                  </p>
-
-                  {/* Buttons */}
-                  <div className='mt-10 flex flex-wrap items-center gap-4'>
-                     {/* View Work */}
-                     <a
-                        href='#work'
-                        className='inline-flex min-h-13 items-center justify-center bg-[#f0ca68] px-7 py-4 font-mono text-[11px] font-medium uppercase tracking-[0.15em] text-[#0C0C0C] transition-all duration-300 hover:bg-[#f6c400]'
-                     >
-                        View Work
-                        <span className='ml-3 text-base'>→</span>
-                     </a>
-
-                     {/* Hire Me */}
-                     <a
-                        href='#contact'
-                        className='inline-flex min-h-13 items-center justify-center border border-white/10 px-7 py-4 font-mono text-[11px] font-medium uppercase tracking-[0.15em] text-white/80 transition-all duration-300 hover:border-[#f0ca68] hover:text-[#f0ca68]'
-                     >
-                        Hire Me
-                     </a>
-                  </div>
+               <div className='mt-12 flex flex-wrap gap-[18px]'>
+                  <a
+                     href='#work'
+                     style={mono}
+                     className='inline-flex h-[53px] items-center bg-[#e8c872] px-[35px] text-[13px] uppercase tracking-[0.15em] text-[#0a0a0a] transition-colors hover:bg-[#f2d78d]'
+                  >
+                     View Work <span className='ml-2 text-[11px]'>→</span>
+                  </a>
+                  <a
+                     href='#contact'
+                     style={mono}
+                     className='inline-flex h-[53px] items-center border border-[#2a2a2a] px-[35px] text-[13px] uppercase tracking-[0.15em] text-[#f0ede6] transition-colors hover:border-[#e8c872] hover:text-[#e8c872]'
+                  >
+                     Hire Me
+                  </a>
                </div>
+            </div>
 
-               {/* Right Showreel */}
-               <div className='relative w-full'>
-                  <div className='relative aspect-[1.2/1] w-full overflow-hidden border border-white/[0.03] bg-[#0d0d0d]'>
-                     {/* Grid */}
-                     <div
-                        className='absolute inset-0'
-                        style={{
-                           backgroundImage: `
-                    linear-gradient(rgba(246,196,0,0.055) 1px, transparent 1px),
-                    linear-gradient(90deg, rgba(246,196,0,0.055) 1px, transparent 1px)
-                  `,
-                           backgroundSize: "58px 58px",
-                        }}
-                     />
-
-                     {/* Gold / warm glow */}
-                     <div className='absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,rgba(246,196,0,0.10),transparent_35%),radial-gradient(circle_at_85%_85%,rgba(100,35,10,0.14),transparent_40%)]' />
-
-                     {/* Center Play Button */}
-                     <div className='absolute inset-0 flex items-center justify-center'>
-                        <button type='button' aria-label='Watch showreel' className='group flex flex-col items-center'>
-                           <span className='relative flex h-24 w-24 items-center justify-center rounded-full border border-[#f0ca68]/50 transition-all duration-500 group-hover:scale-105 group-hover:border-[#f0ca68] sm:h-28 sm:w-28'>
-                              {/* Outer Ring */}
-                              <span className='absolute -inset-3 rounded-full border border-white/[0.03]' />
-
-                              {/* Play Icon */}
-                              <span className='ml-1 text-2xl text-[#f0ca68] transition-transform duration-500 group-hover:scale-110'>
-                                 ▶
-                              </span>
-                           </span>
-
-                           <span className='mt-6 font-mono text-[9px] uppercase tracking-[0.3em] text-white/35 transition-colors duration-300 group-hover:text-[#f0ca68]'>
-                              Watch Showreel
-                           </span>
-                        </button>
-                     </div>
-                  </div>
+            {/* RIGHT */}
+            <div className='lg:py-[18px] lg:pr-[3.4vw]'>
+               <div
+                  className='relative aspect-[4/3] w-full overflow-hidden border border-[#e8c872]/[0.06] sm:aspect-video lg:aspect-auto lg:h-[calc(100vh-36px)] lg:max-h-[670px] lg:min-h-[480px]'
+                  style={{
+                     backgroundColor: "#0b0b0a",
+                     backgroundImage: [
+                        "linear-gradient(to right, rgba(232,200,114,0.07) 1px, transparent 1px)",
+                        "linear-gradient(to bottom, rgba(232,200,114,0.07) 1px, transparent 1px)",
+                        "radial-gradient(ellipse at 0% 0%, rgba(40,28,0,0.95) 0%, transparent 55%)",
+                        "radial-gradient(ellipse at 100% 100%, rgba(45,14,0,0.95) 0%, transparent 55%)",
+                     ].join(","),
+                     backgroundSize: "62px 62px, 62px 62px, 100% 100%, 100% 100%",
+                  }}
+               >
+                  <button
+                     type='button'
+                     aria-label='Watch showreel'
+                     className='group absolute left-1/2 top-1/2 flex -translate-x-1/2 -translate-y-1/2 flex-col items-center'
+                  >
+                     <span className='flex h-[130px] w-[130px] items-center justify-center rounded-full border border-[#e8c872]/[0.08] sm:h-[162px] sm:w-[162px]'>
+                        <span className='flex h-20 w-20 items-center justify-center rounded-full border border-[#e8c872]/60 transition-colors group-hover:bg-[#e8c872]/10 sm:h-[97px] sm:w-[97px]'>
+                           <svg viewBox='0 0 24 24' className='ml-1 h-6 w-6 fill-[#e8c872] sm:h-7 sm:w-7' aria-hidden='true'>
+                              <path d='M6 3.5v17l14-8.5z' />
+                           </svg>
+                        </span>
+                     </span>
+                     <span style={mono} className='mt-1 text-[10px] uppercase tracking-[0.25em] text-[#8a8780] sm:text-[11px]'>
+                        Watch Showreel
+                     </span>
+                  </button>
                </div>
             </div>
          </div>
       </section>
    );
-};
-
-export default Hero;
+}
