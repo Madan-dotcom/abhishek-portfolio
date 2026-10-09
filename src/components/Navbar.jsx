@@ -1,166 +1,113 @@
 import { useState } from "react";
 import logo from "../assets/images/Abhishek.png";
 
+const navLinks = [
+   { label: "SHOWREEL", href: "#showreel" },
+   { label: "WORK", href: "#work" },
+   { label: "ABOUT", href: "#about" },
+   { label: "CONTACT", href: "#contact" },
+];
+
 const Navbar = () => {
    const [isMenuOpen, setIsMenuOpen] = useState(false);
    const [activeMenu, setActiveMenu] = useState("");
+
    const closeMenu = () => {
       setIsMenuOpen(false);
    };
 
+   const handleNavClick = (label) => {
+      setActiveMenu(label);
+      closeMenu();
+   };
+
    return (
-      <nav className='fixed top-0 left-0 right-0 z-[500] w-full border-b border-transparent transition-all  duration-500 '>
-         <div className='max-w-[100rem] mx-auto px-6 py-4  flex items-center justify-between text-[#f6c400]'>
+      <header className='fixed inset-x-0 top-0 z-[500] w-full  bg-[#0C0C0C]/90 backdrop-blur-md'>
+         <nav
+            aria-label='Main navigation'
+            className='mx-auto flex min-h-[76px] w-full max-w-[100rem] items-center justify-between px-5 sm:px-8 lg:px-12 xl:px-16'
+         >
             {/* Logo */}
-            <a href='/' onClick={closeMenu}>
-               <img src={logo} alt='Abhishek Logo' className='w-32 h-auto' />
+            <a href='#showreel' onClick={closeMenu} aria-label='Abhishek home' className='relative z-10 shrink-0'>
+               <img src={logo} alt='Abhishek Logo' className='h-auto w-28 object-contain sm:w-32' />
             </a>
 
             {/* Desktop Navigation */}
-            <ul className='hidden md:flex items-center gap-8 text-sm'>
-               <li>
-                  <a
-                     href='#showreel'
-                     className='transition-colors  duration-500 hover:text-[#c2ae5e] font-mono tracking-wide relative inline-block after:absolute after:left-0 after:-bottom-1 after:h-[1px] after:w-0 after:bg-yellow-300 after:transition-all after:duration-500 after:ease-out hover:after:w-full'
-                  >
-                     SHOWREEL
-                  </a>
-               </li>
+            <ul className='hidden items-center gap-7 md:flex lg:gap-9 xl:gap-12'>
+               {navLinks.map((link) => (
+                  <li key={link.label}>
+                     <a
+                        href={link.href}
+                        onClick={() => setActiveMenu(link.label)}
+                        className={`group relative inline-block py-2 font-mono text-xs tracking-wider transition-colors duration-300 lg:text-sm ${
+                           activeMenu === link.label ? "text-[#E7C15F]" : "text-[#F0EDE6] hover:text-[#E7C15F]"
+                        }`}
+                     >
+                        {link.label}
 
-               <li>
-                  <a
-                     href='#work'
-                     className='transition-colors  duration-500 hover:text-[#c2ae5e] font-mono tracking-wide relative inline-block after:absolute after:left-0
-                      after:-bottom-1 after:h-[1px] after:w-0 after:bg-yellow-300 after:transition-all after:duration-500 after:ease-out hover:after:w-full '
-                  >
-                     WORK
-                  </a>
-               </li>
-
-               <li>
-                  <a
-                     href='#about'
-                     className='transition-colors  duration-500 hover:text-[#c2ae5e] font-mono tracking-wide relative inline-block after:absolute after:left-0 
-                     after:-bottom-1 after:h-[1px] after:w-0 after:bg-yellow-300 after:transition-all after:duration-500 after:ease-out hover:after:w-full '
-                  >
-                     ABOUT
-                  </a>
-               </li>
-
-               <li>
-                  <a
-                     href='#contact'
-                     className='transition-colors  duration-500 hover:text-[#c2ae5e] font-mono tracking-wide relative inline-block after:absolute after:left-0 
-                     after:-bottom-1 after:h-[1px] after:w-0 after:bg-yellow-300 after:transition-all after:duration-500 after:ease-out hover:after:w-full '
-                  >
-                     CONTACT
-                  </a>
-               </li>
+                        <span
+                           className={`absolute -bottom-0.5 left-0 h-px bg-[#E7C15F] transition-[width] duration-500 ease-out ${
+                              activeMenu === link.label ? "w-full" : "w-0 group-hover:w-full"
+                           }`}
+                        />
+                     </a>
+                  </li>
+               ))}
             </ul>
 
             {/* Mobile Menu Button */}
             <button
                type='button'
-               onClick={() => setIsMenuOpen(!isMenuOpen)}
-               className='md:hidden text-2xl'
-               aria-label={isMenuOpen ? "Close menu" : "Open menu"}
+               onClick={() => setIsMenuOpen((open) => !open)}
+               className='relative z-10 flex h-11 w-11 flex-col items-center justify-center gap-[6px] rounded-full border border-white/15 text-[#E7C15F] transition-colors duration-300 hover:border-[#E7C15F] md:hidden'
+               aria-label={isMenuOpen ? "Close navigation menu" : "Open navigation menu"}
                aria-expanded={isMenuOpen}
+               aria-controls='mobile-navigation'
             >
-               {isMenuOpen ? "✕" : "☰"}
+               <span
+                  className={`h-px w-5 bg-current transition-transform duration-300 ${isMenuOpen ? "translate-y-[3.5px] rotate-45" : ""}`}
+               />
+               <span
+                  className={`h-px w-5 bg-current transition-transform duration-300 ${isMenuOpen ? "-translate-y-[3.5px] -rotate-45" : ""}`}
+               />
             </button>
-         </div>
+         </nav>
 
          {/* Mobile Navigation */}
-         {isMenuOpen && (
-            <div className='md:hidden border-t border-white/10 px-6 py-6'>
-               <ul className='flex flex-col items-center justify-center gap-6 text-sm'>
-                  {/* SHOWREEL */}
-                  <li>
-                     <a
-                        href='#showreel'
-                        onClick={() => {
-                           setActiveMenu("showreel");
-                           closeMenu();
-                        }}
-                        className={`relative inline-block font-mono tracking-wide transition-colors duration-500 ${
-                           activeMenu === "showreel" ? "text-[#c2ae5e]" : "text-[#f6c400]"
-                        }`}
-                     >
-                        SHOWREEL
-                        <span
-                           className={`absolute left-0 -bottom-1 h-[1px] bg-yellow-300 transition-all duration-500 ease-out ${
-                              activeMenu === "showreel" ? "w-full" : "w-0"
-                           }`}
-                        ></span>
-                     </a>
-                  </li>
+         <div
+            id='mobile-navigation'
+            className={`grid bg-[#0C0C0C] transition-[grid-template-rows,opacity] duration-300 md:hidden ${
+               isMenuOpen ? "grid-rows-[1fr] opacity-100" : "pointer-events-none grid-rows-[0fr] opacity-0"
+            }`}
+            aria-hidden={!isMenuOpen}
+         >
+            <div className='overflow-hidden'>
+               <ul className=' px-5 pb-5 pt-2 sm:px-8'>
+                  {navLinks.map((link) => {
+                     const isActive = activeMenu === link.label;
 
-                  {/* WORK */}
-                  <li>
-                     <a
-                        href='#work'
-                        onClick={() => {
-                           setActiveMenu("work");
-                           closeMenu();
-                        }}
-                        className={`relative inline-block font-mono tracking-wide transition-colors duration-500 ${
-                           activeMenu === "work" ? "text-[#c2ae5e]" : "text-[#f6c400]"
-                        }`}
-                     >
-                        WORK
-                        <span
-                           className={`absolute left-0 -bottom-1 h-[1px] bg-yellow-300 transition-all duration-500 ease-out ${
-                              activeMenu === "work" ? "w-full" : "w-0"
-                           }`}
-                        ></span>
-                     </a>
-                  </li>
-
-                  {/* ABOUT */}
-                  <li>
-                     <a
-                        href='#about'
-                        onClick={() => {
-                           setActiveMenu("about");
-                           closeMenu();
-                        }}
-                        className={`relative inline-block font-mono tracking-wide transition-colors duration-500 ${
-                           activeMenu === "about" ? "text-[#c2ae5e]" : "text-[#f6c400]"
-                        }`}
-                     >
-                        ABOUT
-                        <span
-                           className={`absolute left-0 -bottom-1 h-[1px] bg-yellow-300 transition-all duration-500 ease-out ${
-                              activeMenu === "about" ? "w-full" : "w-0"
-                           }`}
-                        ></span>
-                     </a>
-                  </li>
-
-                  {/* CONTACT */}
-                  <li>
-                     <a
-                        href='#contact'
-                        onClick={() => {
-                           setActiveMenu("contact");
-                           closeMenu();
-                        }}
-                        className={`relative inline-block font-mono tracking-wide transition-colors duration-500 ${
-                           activeMenu === "contact" ? "text-[#c2ae5e]" : "text-[#f6c400]"
-                        }`}
-                     >
-                        CONTACT
-                        <span
-                           className={`absolute left-0 -bottom-1 h-[1px] bg-yellow-300 transition-all duration-500 ease-out ${
-                              activeMenu === "contact" ? "w-full" : "w-0"
-                           }`}
-                        ></span>
-                     </a>
-                  </li>
+                     return (
+                        <li key={link.label}>
+                           <a
+                              href={link.href}
+                              tabIndex={isMenuOpen ? 0 : -1}
+                              onClick={() => handleNavClick(link.label)}
+                              className={`flex items-center justify-between border-b border-white/[0.07] py-4 font-mono text-xs tracking-[0.16em] transition-colors duration-300 ${
+                                 isActive ? "text-[#E7C15F]" : "text-[#F0EDE6] hover:text-[#E7C15F]"
+                              }`}
+                           >
+                              <span>{link.label}</span>
+                              <span aria-hidden='true' className='text-[#E7C15F]'>
+                                 ↗
+                              </span>
+                           </a>
+                        </li>
+                     );
+                  })}
                </ul>
             </div>
-         )}
-      </nav>
+         </div>
+      </header>
    );
 };
 
