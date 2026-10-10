@@ -1,11 +1,45 @@
+import { useState } from "react";
+import abhi from "../assets/images/Abhi 2.png";
+import Avink from "../assets/videos/Anvik Eshan.mp4";
+
 const Hero = () => {
+   const [isVideoLoaded, setIsVideoLoaded] = useState(false);
+
    return (
       <section id='showreel' className='relative min-h-screen overflow-hidden bg-[#0C0C0C] text-[#F0EDE6]'>
-         {/* Background details */}
+         {/* Full-width cinematic background */}
+         <div className='pointer-events-none absolute inset-0'>
+            {/* Background image fallback */}
+            <img
+               src={abhi}
+               alt=''
+               fetchPriority='high'
+               className={`absolute inset-0 h-full w-full object-cover object-center transition-opacity duration-700 ${
+                  isVideoLoaded ? "opacity-0" : "opacity-100"
+               }`}
+            />
 
-         {/* Floating photo cards */}
+            {/* Background video */}
+            <video
+               autoPlay
+               muted
+               loop
+               playsInline
+               preload='metadata'
+               poster='/images/hero-background.jpg'
+               onPlaying={() => setIsVideoLoaded(true)}
+               className='absolute inset-0 h-full w-full object-cover object-center'
+            >
+               <source src={Avink} type='video/mp4' />
+            </video>
 
-         {/* Main hero content */}
+            {/* Dark overlays for text readability */}
+            <div className='absolute inset-0 bg-black/40' />
+
+            <div className='absolute inset-0 bg-gradient-to-r from-[#0C0C0C]/95 via-[#0C0C0C]/70 to-[#0C0C0C]/15' />
+
+            <div className='absolute inset-0 bg-gradient-to-t from-[#0C0C0C] via-transparent to-[#0C0C0C]/30' />
+         </div>
 
          {/* Main hero content */}
          <div className='relative z-10 mx-auto flex min-h-screen w-full max-w-7xl items-center px-6 pb-20 pt-28 sm:px-10 lg:px-16'>
@@ -43,9 +77,15 @@ const Hero = () => {
             </div>
          </div>
 
-         {/* Statistics */}
-
          {/* Scroll indicator */}
+         <a
+            href='#work'
+            aria-label='Scroll to featured work'
+            className='absolute bottom-7 right-6 z-10 flex items-center gap-3 text-[10px] tracking-[0.25em] text-white/70 transition-colors hover:text-[#E7C15F] sm:right-10 lg:right-16'
+         >
+            SCROLL TO EXPLORE
+            <span className='animate-bounce text-base'>↓</span>
+         </a>
       </section>
    );
 };
