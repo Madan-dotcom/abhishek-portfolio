@@ -1,6 +1,5 @@
 import { useState } from "react";
 import abhi from "../assets/images/Abhi 2.png";
-import Avink from "../assets/videos/Anvik Eshan.mp4";
 
 const Hero = () => {
    const [isVideoLoaded, setIsVideoLoaded] = useState(false);
@@ -30,7 +29,7 @@ const Hero = () => {
                onPlaying={() => setIsVideoLoaded(true)}
                className='absolute inset-0 h-full w-full object-cover object-center'
             >
-               <source src={Avink} type='video/mp4' />
+               <source src={""} type='video/mp4' />
             </video>
 
             {/* Dark overlays for text readability */}
@@ -44,7 +43,7 @@ const Hero = () => {
          {/* Main hero content */}
          <div className='relative z-10 mx-auto flex min-h-screen w-full max-w-7xl items-center px-6 pb-20 pt-28 sm:px-10 lg:px-16'>
             <div className='w-full max-w-3xl'>
-               <p className='mb-6 font-serif text-sm text-[#E7C15F] sm:text-base'>— director’s notebook — open</p>
+               <p className='mb-6 font-serif text-sm text-[#E7C15F] sm:text-base'> -- Editor Notebook — open</p>
 
                <h1 className='font-[family-name:var(--font-display)] text-5xl font-bold leading-[0.92] tracking-tight sm:text-7xl md:text-8xl lg:text-[7rem]'>
                   <span className='block'>Every</span>
