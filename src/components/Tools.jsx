@@ -78,7 +78,7 @@ export default function Tools() {
       <section
          id='tools'
          ref={sectionRef}
-         className={`tools-section relative overflow-hidden bg-[#0C0C0C] px-5 py-24 text-[#F0EDE6] sm:px-8 md:px-12 md:py-32 ${
+         className={`tools-section relative overflow-hidden bg-[#0C0C0C] px-5 py-16 text-[#F0EDE6] sm:px-8 md:px-12 md:py-24 ${
             visible ? "is-visible" : ""
          }`}
       >
