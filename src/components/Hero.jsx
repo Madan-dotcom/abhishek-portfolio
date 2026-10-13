@@ -1,5 +1,5 @@
 import { useState } from "react";
-import abhi from "../assets/images/Abhi 2.png";
+import abhi from "../assets/images/Abihsehk photo.png";
 
 const Hero = () => {
    const [isVideoLoaded, setIsVideoLoaded] = useState(false);

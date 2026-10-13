@@ -4,6 +4,8 @@ import Stats from "./components/Stats";
 import Tools from "./components/Tools";
 import Showreel from "./components/Showreel";
 import Work from "./components/Work";
+import About from "./components/About";
+import Contact from "./components/Contact";
 
 function App() {
    return (
@@ -15,6 +17,8 @@ function App() {
             <Tools />
             <Showreel />
             <Work />
+            <About />
+            <Contact />
          </main>
       </div>
    );
