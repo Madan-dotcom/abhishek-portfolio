@@ -121,6 +121,16 @@ Looking forward to hearing from you.
                   >
                      <span className='flex h-8 w-8 items-center justify-center border border-white/10'>IG</span>
                      @abhishek.edits
+                     <span className='ml-auto text-[10px]'> coming soon↗</span>
+                  </a>
+                  <a
+                     href='https://www.linkedin.com/in/abhishek-n-s-061b15384/'
+                     target='_blank'
+                     rel='noreferrer'
+                     className='flex items-center gap-4 border-b border-white/10 py-4 text-xs tracking-[0.12em] text-white/55 transition-colors hover:text-[#D8B66A]'
+                  >
+                     <span className='flex h-8 w-8 items-center justify-center border border-white/10'>I</span>
+                     LinkedIn
                      <span className='ml-auto text-[10px]'>↗</span>
                   </a>
                </div>

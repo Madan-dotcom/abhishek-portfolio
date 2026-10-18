@@ -361,7 +361,8 @@ export default function Work() {
             </div>
             <div className='mt-14 flex justify-center'>
                <a
-                  href='#work'
+                  href='#AllWork'
+                  target='_blank'
                   className='inline-flex items-center gap-3 border border-[#D6B66B]/60 px-7 py-4 font-mono text-[10px] tracking-[0.2em] text-[#D6B66B] transition-all duration-300 hover:bg-[#D6B66B] hover:text-black focus-visible:outline focus-visible:outline-2 focus-visible:outline-[#D6B66B]'
                >
                   MORE PROJECTS <span aria-hidden='true'>↗</span>
