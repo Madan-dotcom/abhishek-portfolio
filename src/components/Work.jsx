@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { FaPlay, FaTimes, FaChevronLeft, FaChevronRight, FaVolumeUp, FaVolumeMute } from "react-icons/fa";
+import { Link } from "react-router-dom";
 
 import haldi from "../assets/videos/Haldi Teaser.mp4";
 import reel2 from "../assets/videos/Anvik Eshan.mp4";
@@ -305,7 +306,7 @@ export default function Work() {
    const featuredLayout = activeCategory === "ALL";
 
    return (
-      <section className='relative overflow-hidden bg-[#0B0B0B] py-20 text-[#F0EDE6] sm:py-24'>
+      <section id='work' className='relative overflow-hidden bg-[#0B0B0B] py-20 text-[#F0EDE6] sm:py-24'>
          <div className='mx-auto w-[calc(100%-40px)] max-w-[1754px] sm:w-[calc(100%-64px)]'>
             <header className='mb-11'>
                <div className='mb-2 flex items-center gap-[18px]'>
@@ -359,14 +360,13 @@ export default function Work() {
                   );
                })}
             </div>
-            <div className='mt-14 flex justify-center'>
-               <a
-                  href='#AllWork'
-                  target='_blank'
-                  className='inline-flex items-center gap-3 border border-[#D6B66B]/60 px-7 py-4 font-mono text-[10px] tracking-[0.2em] text-[#D6B66B] transition-all duration-300 hover:bg-[#D6B66B] hover:text-black focus-visible:outline focus-visible:outline-2 focus-visible:outline-[#D6B66B]'
+            <div className='mt-14 flex w-full justify-end'>
+               <Link
+                  to='/all-work'
+                  className='inline-flex items-center justify-center gap-3 border border-[#D6B66B]/60 px-7 py-4 font-mono text-[10px] tracking-[0.2em] text-[#D6B66B] transition-all duration-300 hover:bg-[#D6B66B] hover:text-black focus-visible:outline focus-visible:outline-2 focus-visible:outline-[#D6B66B]'
                >
                   MORE PROJECTS <span aria-hidden='true'>↗</span>
-               </a>
+               </Link>
             </div>
          </div>
 

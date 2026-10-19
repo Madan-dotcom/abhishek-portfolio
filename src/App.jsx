@@ -7,22 +7,33 @@ import Work from "./components/Work";
 import About from "./components/About";
 import Contact from "./components/Contact";
 import Footer from "./components/Footer";
+import { Routes, Route } from "react-router-dom";
+import AllWork from "./components/AllWork";
 
 function App() {
    return (
-      <div>
-         <Navbar />
-         <main>
-            <Hero />
-            <Stats />
-            <Tools />
-            <Showreel />
-            <Work />
-            <About />
-            <Contact />
-            <Footer />
-         </main>
-      </div>
+      <Routes>
+         <Route
+            path='/'
+            element={
+               <div>
+                  <Navbar />
+                  <main>
+                     <Hero />
+                     <Stats />
+                     <Tools />
+                     <Showreel />
+                     <Work />
+                     <About />
+                     <Contact />
+                     <Footer />
+                  </main>
+               </div>
+            }
+         />
+
+         <Route path='/all-work' element={<AllWork />} />
+      </Routes>
    );
 }
 
