@@ -147,7 +147,7 @@ export default function Showreel() {
                <div>
                   <p className='mb-5 text-[10px] uppercase tracking-[0.35em] text-[#E7C15F] sm:text-xs'>A selection of my work</p>
 
-                  <h2 className='font-serif text-4xl font-normal leading-tight tracking-tight sm:text-5xl md:text-7xl'>
+                  <h2 className='font-serif text-4xl font-bold leading-tight tracking-tight sm:text-5xl md:text-7xl'>
                      Stories told
                      <br />
                      through <span className='italic text-[#E7C15F]'>motion.</span>

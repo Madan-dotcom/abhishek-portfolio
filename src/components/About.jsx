@@ -18,7 +18,7 @@ export default function About() {
    const [imageError, setImageError] = useState(false);
 
    return (
-      <section id='about' className='relative overflow-hidden bg-[#0C0C0C] px-6 py-20 text-[#F0EDE6] sm:px-10 sm:py-24 lg:px-[60px]'>
+      <section id='about' className='relative overflow-hidden bg-[#0C0C0C] px-6 py-12 text-[#F0EDE6] sm:px-10 sm:py-12 lg:px-[60px]'>
          <div className='mx-auto max-w-[1600px]'>
             {/* Section heading */}
             <div className='mb-12'>

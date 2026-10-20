@@ -60,7 +60,7 @@ Looking forward to hearing from you.
    };
 
    return (
-      <section id='contact' className='relative overflow-hidden bg-[#0C0C0C] px-6 py-20 text-[#F0EDE6] sm:px-10 sm:py-24 lg:px-7'>
+      <section id='contact' className='relative overflow-hidden bg-[#0C0C0C] px-6 py-12 text-[#F0EDE6] sm:px-10 sm:py-12 lg:px-7'>
          <div className='mx-auto grid max-w-[1600px] grid-cols-1 gap-14 lg:grid-cols-[0.85fr_1fr] lg:gap-20'>
             {/* LEFT: INTRODUCTION AND CONTACT DETAILS */}
             <div>

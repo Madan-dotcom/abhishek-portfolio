@@ -53,8 +53,8 @@ export default function Tools() {
 
       // Reveal the section when it enters the viewport.
       if (!("IntersectionObserver" in window)) {
-         setVisible(true);
-         return;
+         const frame = window.requestAnimationFrame(() => setVisible(true));
+         return () => window.cancelAnimationFrame(frame);
       }
 
       const observer = new IntersectionObserver(
@@ -78,7 +78,7 @@ export default function Tools() {
       <section
          id='tools'
          ref={sectionRef}
-         className={`tools-section relative overflow-hidden bg-[#0C0C0C] px-5 py-16 text-[#F0EDE6] sm:px-8 md:px-12 md:py-24 ${
+         className={`tools-section relative overflow-hidden bg-[#0C0C0C] px-5 py-12 text-[#F0EDE6] sm:px-8 md:px-12 md:py-24 ${
             visible ? "is-visible" : ""
          }`}
       >
@@ -94,7 +94,7 @@ export default function Tools() {
                <div>
                   <p className='mb-5 text-[10px] uppercase tracking-[0.3em] text-[#E7C15F] sm:text-xs'>The tools behind the craft</p>
 
-                  <h2 className='font-serif text-4xl font-normal leading-tight tracking-tight sm:text-5xl md:text-7xl'>
+                  <h2 className='font-serif text-4xl font-bold leading-tight tracking-tight sm:text-5xl md:text-7xl'>
                      Technology
                      <br />
                      meets <span className='text-[#E7C15F]'>creativity.</span>

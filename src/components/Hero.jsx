@@ -43,7 +43,9 @@ const Hero = () => {
          {/* Main hero content */}
          <div className='relative z-10 mx-auto flex min-h-screen w-full max-w-7xl items-center px-6 pb-20 pt-28 sm:px-10 lg:px-16'>
             <div className='w-full max-w-3xl'>
-               <p className='mb-6 font-serif text-sm text-[#E7C15F] sm:text-base'> -- Editor Notebook — open</p>
+               <p className='mb-6 font-serif text-sm text-[#E7C15F] sm:text-base tracking-wider'>
+                  An Editor’s 🧠! <br /> "Hands That Tell Stories!" Every frame has a feeling. Every cut has a purpose. 🎬
+               </p>
 
                <h1 className='font-[family-name:var(--font-display)] text-5xl font-bold leading-[0.92] tracking-tight sm:text-7xl md:text-8xl lg:text-[7rem]'>
                   <span className='block'>Every</span>
