@@ -5,14 +5,98 @@ const WHATSAPP_NUMBER = "918088353822";
 
 export default function Contact() {
    const [form, setForm] = useState({
-      name: "",
+      firstName: "",
+      lastName: "",
       email: "",
+      phone: "",
       projectType: "",
       message: "",
    });
 
+   const clearForm = () => {
+      setForm({
+         firstName: "",
+         lastName: "",
+         email: "",
+         phone: "",
+         projectType: "",
+         message: "",
+      });
+
+      setErrors({});
+      setShowOptions(false);
+   };
+
+   const [errors, setErrors] = useState({});
    const [showOptions, setShowOptions] = useState(false);
 
+   // Validate individual fields
+   const validateField = (name, value) => {
+      const trimmedValue = value.trim();
+
+      switch (name) {
+         case "firstName":
+            return trimmedValue ? "" : "Please enter your first name.";
+
+         case "lastName":
+            return trimmedValue ? "" : "Please enter your last name.";
+
+         case "email":
+            if (!trimmedValue) {
+               return "Please enter your email address.";
+            }
+
+            if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(trimmedValue)) {
+               return "Please enter a valid email address.";
+            }
+
+            return "";
+
+         case "phone": {
+            if (!trimmedValue) {
+               return "Please enter your phone number.";
+            }
+
+            const digits = trimmedValue.replace(/\D/g, "");
+
+            if (!/^[+\d\s().-]+$/.test(trimmedValue)) {
+               return "Please enter a valid phone number.";
+            }
+
+            if (digits.length < 7 || digits.length > 15) {
+               return "Phone number must contain 7–15 digits.";
+            }
+
+            return "";
+         }
+
+         case "projectType":
+            return trimmedValue ? "" : "Please select a project type.";
+
+         case "message":
+            return trimmedValue ? "" : "Please tell me about your project.";
+
+         default:
+            return "";
+      }
+   };
+
+   // Validate the complete form
+   const validateForm = () => {
+      const newErrors = {};
+
+      Object.keys(form).forEach((field) => {
+         const error = validateField(field, form[field]);
+
+         if (error) {
+            newErrors[field] = error;
+         }
+      });
+
+      return newErrors;
+   };
+
+   // Update fields and clear their errors when corrected
    const updateField = (event) => {
       const { name, value } = event.target;
 
@@ -20,29 +104,63 @@ export default function Contact() {
          ...previous,
          [name]: value,
       }));
+
+      setErrors((previous) => ({
+         ...previous,
+         [name]: validateField(name, value),
+      }));
    };
 
+   // Show errors instead of the browser's default validation popup
+   const handleSubmit = (event) => {
+      event.preventDefault();
+
+      const newErrors = validateForm();
+      setErrors(newErrors);
+
+      if (Object.keys(newErrors).length > 0) {
+         setShowOptions(false);
+
+         const firstInvalidField = Object.keys(newErrors)[0];
+         document
+            .getElementById(
+               {
+                  firstName: "contact-first-name",
+                  lastName: "contact-last-name",
+                  email: "contact-email",
+                  phone: "contact-phone",
+                  projectType: "project-type",
+                  message: "project-message",
+               }[firstInvalidField],
+            )
+            ?.focus();
+
+         return;
+      }
+
+      setShowOptions(true);
+   };
+
+   // Format the customer's inquiry
    const getInquiry = () =>
       `
 Hello Abhishek,
 
 I'd like to discuss a video editing project.
 
-Name: ${form.name}
+First Name: ${form.firstName}
+Last Name: ${form.lastName}
 Email: ${form.email}
+Phone: ${form.phone}
 Project Type: ${form.projectType}
 
 Project Details:
 ${form.message}
 
 Looking forward to hearing from you.
-  `.trim();
+    `.trim();
 
-   const handleSubmit = (event) => {
-      event.preventDefault();
-      setShowOptions(true);
-   };
-
+   // Send inquiry through Email
    const sendEmail = () => {
       const subject = `Project Inquiry - ${form.projectType}`;
 
@@ -52,12 +170,23 @@ Looking forward to hearing from you.
       setShowOptions(false);
    };
 
+   // Send inquiry through WhatsApp
    const sendWhatsApp = () => {
       const whatsappUrl = `https://wa.me/${WHATSAPP_NUMBER}` + `?text=${encodeURIComponent(getInquiry())}`;
 
       window.open(whatsappUrl, "_blank", "noopener,noreferrer");
       setShowOptions(false);
    };
+
+   // Existing field styling, with red borders for invalid fields
+   const inputClass = (field) =>
+      `w-full border ${
+         errors[field] ? "border-red-500" : "border-white/10"
+      } bg-white/[0.02] px-4 py-3 text-sm text-white outline-none transition-colors placeholder:text-white/20 focus:border-[#D8B66A]/60`;
+
+   const labelClass = "mb-2 block text-[9px] uppercase tracking-[0.2em] text-white/50";
+
+   const errorClass = "mt-2 text-xs leading-5 text-red-500";
 
    return (
       <section id='contact' className='relative overflow-hidden bg-[#0C0C0C] px-6 py-12 text-[#F0EDE6] sm:px-10 sm:py-12 lg:px-7'>
@@ -121,8 +250,9 @@ Looking forward to hearing from you.
                   >
                      <span className='flex h-8 w-8 items-center justify-center border border-white/10'>IG</span>
                      @abhishek.edits
-                     <span className='ml-auto text-[10px]'> coming soon↗</span>
+                     <span className='ml-auto text-[10px]'>coming soon ↗</span>
                   </a>
+
                   <a
                      href='https://www.linkedin.com/in/abhishek-n-s-061b15384/'
                      target='_blank'
@@ -138,29 +268,65 @@ Looking forward to hearing from you.
 
             {/* RIGHT: CONTACT FORM */}
             <div className='flex items-start pt-2 lg:pt-36'>
-               <form onSubmit={handleSubmit} className='w-full space-y-5'>
+               <form onSubmit={handleSubmit} noValidate className='w-full space-y-5'>
+                  {/* FIRST NAME AND LAST NAME */}
                   <div className='grid grid-cols-1 gap-5 sm:grid-cols-2'>
                      <div>
-                        <label htmlFor='contact-name' className='mb-2 block text-[9px] uppercase tracking-[0.2em] text-white/50'>
-                           YOUR NAME
+                        <label htmlFor='contact-first-name' className={labelClass}>
+                           FIRST NAME
                         </label>
 
                         <input
-                           id='contact-name'
-                           name='name'
+                           id='contact-first-name'
+                           name='firstName'
                            type='text'
-                           autoComplete='name'
-                           placeholder='e.g. Priya Sharma'
-                           value={form.name}
+                           autoComplete='given-name'
+                           placeholder='e.g. Priya'
+                           value={form.firstName}
                            onChange={updateField}
-                           required
-                           className='w-full border border-white/10 bg-white/[0.02] px-4 py-3 text-sm text-white outline-none transition-colors placeholder:text-white/20 focus:border-[#D8B66A]/60'
+                           aria-invalid={Boolean(errors.firstName)}
+                           aria-describedby={errors.firstName ? "first-name-error" : undefined}
+                           className={inputClass("firstName")}
                         />
+
+                        {errors.firstName && (
+                           <p id='first-name-error' className={errorClass} role='alert'>
+                              {errors.firstName}
+                           </p>
+                        )}
                      </div>
 
                      <div>
-                        <label htmlFor='contact-email' className='mb-2 block text-[9px] uppercase tracking-[0.2em] text-white/50'>
-                           EMAIL
+                        <label htmlFor='contact-last-name' className={labelClass}>
+                           LAST NAME
+                        </label>
+
+                        <input
+                           id='contact-last-name'
+                           name='lastName'
+                           type='text'
+                           autoComplete='family-name'
+                           placeholder='e.g. Sharma'
+                           value={form.lastName}
+                           onChange={updateField}
+                           aria-invalid={Boolean(errors.lastName)}
+                           aria-describedby={errors.lastName ? "last-name-error" : undefined}
+                           className={inputClass("lastName")}
+                        />
+
+                        {errors.lastName && (
+                           <p id='last-name-error' className={errorClass} role='alert'>
+                              {errors.lastName}
+                           </p>
+                        )}
+                     </div>
+                  </div>
+
+                  {/* EMAIL AND PHONE */}
+                  <div className='grid grid-cols-1 gap-5 sm:grid-cols-2'>
+                     <div>
+                        <label htmlFor='contact-email' className={labelClass}>
+                           EMAIL ADDRESS
                         </label>
 
                         <input
@@ -171,14 +337,47 @@ Looking forward to hearing from you.
                            placeholder='you@email.com'
                            value={form.email}
                            onChange={updateField}
-                           required
-                           className='w-full border border-white/10 bg-white/[0.02] px-4 py-3 text-sm text-white outline-none transition-colors placeholder:text-white/20 focus:border-[#D8B66A]/60'
+                           aria-invalid={Boolean(errors.email)}
+                           aria-describedby={errors.email ? "email-error" : undefined}
+                           className={inputClass("email")}
                         />
+
+                        {errors.email && (
+                           <p id='email-error' className={errorClass} role='alert'>
+                              {errors.email}
+                           </p>
+                        )}
+                     </div>
+
+                     <div>
+                        <label htmlFor='contact-phone' className={labelClass}>
+                           PHONE NUMBER
+                        </label>
+
+                        <input
+                           id='contact-phone'
+                           name='phone'
+                           type='tel'
+                           autoComplete='tel'
+                           placeholder='+91 98765 43210'
+                           value={form.phone}
+                           onChange={updateField}
+                           aria-invalid={Boolean(errors.phone)}
+                           aria-describedby={errors.phone ? "phone-error" : undefined}
+                           className={inputClass("phone")}
+                        />
+
+                        {errors.phone && (
+                           <p id='phone-error' className={errorClass} role='alert'>
+                              {errors.phone}
+                           </p>
+                        )}
                      </div>
                   </div>
 
+                  {/* PROJECT TYPE */}
                   <div>
-                     <label htmlFor='project-type' className='mb-2 block text-[9px] uppercase tracking-[0.2em] text-white/50'>
+                     <label htmlFor='project-type' className={labelClass}>
                         PROJECT TYPE
                      </label>
 
@@ -187,12 +386,13 @@ Looking forward to hearing from you.
                         name='projectType'
                         value={form.projectType}
                         onChange={updateField}
-                        required
-                        className='w-full border border-white/10 bg-[#111111] px-4 py-3 text-sm text-white outline-none transition-colors focus:border-[#D8B66A]/60'
+                        aria-invalid={Boolean(errors.projectType)}
+                        aria-describedby={errors.projectType ? "project-type-error" : undefined}
+                        className={`w-full border ${
+                           errors.projectType ? "border-red-500" : "border-white/10"
+                        } bg-[#111111] px-4 py-3 text-sm text-white outline-none transition-colors focus:border-[#D8B66A]/60`}
                      >
-                        <option value='' disabled>
-                           Select a project type
-                        </option>
+                        <option value=''>Select a project type</option>
                         <option value='Brand Film'>Brand Film</option>
                         <option value='Commercial'>Commercial</option>
                         <option value='Music Video'>Music Video</option>
@@ -201,10 +401,17 @@ Looking forward to hearing from you.
                         <option value='Wedding Film'>Wedding Film</option>
                         <option value='Other'>Other</option>
                      </select>
+
+                     {errors.projectType && (
+                        <p id='project-type-error' className={errorClass} role='alert'>
+                           {errors.projectType}
+                        </p>
+                     )}
                   </div>
 
+                  {/* PROJECT DETAILS */}
                   <div>
-                     <label htmlFor='project-message' className='mb-2 block text-[9px] uppercase tracking-[0.2em] text-white/50'>
+                     <label htmlFor='project-message' className={labelClass}>
                         TELL ME ABOUT YOUR PROJECT
                      </label>
 
@@ -215,18 +422,36 @@ Looking forward to hearing from you.
                         placeholder='Briefly describe your vision, timeline, and budget...'
                         value={form.message}
                         onChange={updateField}
-                        required
-                        className='w-full resize-y border border-white/10 bg-white/[0.02] px-4 py-3 text-sm text-white outline-none transition-colors placeholder:text-white/20 focus:border-[#D8B66A]/60'
+                        aria-invalid={Boolean(errors.message)}
+                        aria-describedby={errors.message ? "message-error" : undefined}
+                        className={`${inputClass("message")} resize-y`}
                      />
+
+                     {errors.message && (
+                        <p id='message-error' className={errorClass} role='alert'>
+                           {errors.message}
+                        </p>
+                     )}
                   </div>
 
-                  <button
-                     type='submit'
-                     className='inline-flex min-h-[46px] items-center gap-3 bg-[#D8B66A] px-9 py-4 text-[9px] font-semibold uppercase tracking-[0.2em] text-black transition-colors hover:bg-[#F0D58D]'
-                  >
-                     SEND MESSAGE
-                     <span aria-hidden='true'>→</span>
-                  </button>
+                  <div className='flex flex-wrap items-center gap-3'>
+                     <button
+                        type='submit'
+                        className='inline-flex min-h-[46px] items-center gap-3 bg-[#D8B66A] px-9 py-4 text-[9px] font-semibold uppercase tracking-[0.2em] text-black transition-colors hover:bg-[#F0D58D]'
+                     >
+                        SEND MESSAGE
+                        <span aria-hidden='true'>→</span>
+                     </button>
+
+                     <button
+                        type='button'
+                        onClick={clearForm}
+                        className='inline-flex min-h-[46px] items-center gap-3 border border-[#D8B66A]/60 px-6 py-4 text-[9px] font-semibold uppercase tracking-[0.2em] text-[#D8B66A] transition-colors hover:bg-[#D8B66A]/10'
+                     >
+                        <span aria-hidden='true'>↻</span>
+                        CLEAR FORM
+                     </button>
+                  </div>
                </form>
             </div>
          </div>
@@ -259,7 +484,8 @@ Looking forward to hearing from you.
                   <p className='mb-3 text-[9px] uppercase tracking-[0.25em] text-[#D8B66A]'>ONE LAST STEP</p>
 
                   <h3 id='contact-dialog-title' className='font-serif text-3xl text-[#F0EDE6]'>
-                     Let's talk<span className='italic text-[#D8B66A]'>.</span>
+                     Let's talk
+                     <span className='italic text-[#D8B66A]'>.</span>
                   </h3>
 
                   <p className='mt-3 text-sm leading-6 text-white/50'>
@@ -272,10 +498,12 @@ Looking forward to hearing from you.
                      className='mt-7 flex w-full items-center gap-4 border border-white/10 p-4 text-left transition-colors hover:border-[#D8B66A]/60 hover:bg-white/[0.03]'
                   >
                      <span className='flex h-10 w-10 items-center justify-center border border-[#D8B66A]/30 text-[#D8B66A]'>✉</span>
+
                      <span className='flex-1'>
                         <span className='block text-sm text-[#F0EDE6]'>Send via Email</span>
                         <span className='mt-1 block break-all text-xs text-white/40'>{CONTACT_EMAIL}</span>
                      </span>
+
                      <span className='text-[#D8B66A]'>↗</span>
                   </button>
 
@@ -290,10 +518,12 @@ Looking forward to hearing from you.
                            <path d='M9 8.5c.4 2.3 2.2 4.1 4.5 4.5' />
                         </svg>
                      </span>
+
                      <span className='flex-1'>
                         <span className='block text-sm text-[#F0EDE6]'>Send via WhatsApp</span>
                         <span className='mt-1 block text-xs text-white/40'>Open a prefilled WhatsApp message</span>
                      </span>
+
                      <span className='text-[#D8B66A]'>↗</span>
                   </button>
 
