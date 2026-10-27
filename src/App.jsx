@@ -9,6 +9,7 @@ import Contact from "./components/Contact";
 import Footer from "./components/Footer";
 import { Routes, Route } from "react-router-dom";
 import AllWork from "./components/AllWork";
+import FullExperience from "./components/FullExperience";
 
 function App() {
    return (
@@ -33,6 +34,8 @@ function App() {
          />
 
          <Route path='/all-work' element={<AllWork />} />
+
+         <Route path='/about' element={<FullExperience />} />
       </Routes>
    );
 }

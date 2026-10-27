@@ -1,6 +1,8 @@
 import { useState } from "react";
 import abhi from "../assets/images/Abihsehk photo.png";
 
+import { Link } from "react-router-dom";
+
 const skills = [
    "NARRATIVE EDITING",
    "COLOR GRADING",
@@ -100,13 +102,28 @@ export default function About() {
                   </div>
 
                   {/* Contact CTA */}
-                  <div className='mt-10'>
-                     <a
-                        href='#contact'
-                        className='inline-flex min-h-[46px] items-center justify-center gap-3 bg-[#D8B66A] px-8 py-4 text-[9px] font-semibold uppercase tracking-[0.2em] text-black transition-colors duration-300 hover:bg-[#F0D58D]'
-                     >
-                        LET'S COLLABORATE <span aria-hidden='true'>→</span>
-                     </a>
+                  <div className='mt-10 flex flex-wrap items-center gap-4'>
+                     {/* Let's Collaborate Button */}
+                     <div>
+                        <a
+                           href='#contact'
+                           className='inline-flex min-h-[46px] items-center justify-center gap-3 bg-[#D8B66A] px-8 py-4 text-[9px] font-semibold uppercase tracking-[0.2em] text-black transition-colors duration-300 hover:bg-[#F0D58D]'
+                        >
+                           LET'S COLLABORATE
+                           <span aria-hidden='true'>→</span>
+                        </a>
+                     </div>
+
+                     {/* More About Me Button */}
+                     <div>
+                        <Link
+                           to='/about'
+                           className='group inline-flex min-h-[46px] items-center justify-center gap-4 border border-[#D8B66B] px-8 py-4 font-mono text-[10px] uppercase tracking-[0.2em] text-[#D8B66B] transition-all duration-300 hover:bg-[#D8B66B] hover:text-[#0C0C0C]'
+                        >
+                           MORE ABOUT ME
+                           <span className='transition-transform duration-300 group-hover:translate-x-1'>↗</span>
+                        </Link>
+                     </div>
                   </div>
                </div>
             </div>

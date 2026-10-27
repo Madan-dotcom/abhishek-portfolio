@@ -399,6 +399,8 @@ Looking forward to hearing from you.
                         <option value='Documentary'>Documentary</option>
                         <option value='Social Content'>Social Content</option>
                         <option value='Wedding Film'>Wedding Film</option>
+                        <option value='Wedding Film'>Freelancing</option>
+                        <option value='Wedding Film'>Job offer</option>
                         <option value='Other'>Other</option>
                      </select>
 
