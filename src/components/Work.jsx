@@ -54,7 +54,7 @@ const projects = [
    },
 ];
 
-const categories = ["ALL", "BRAND FILMS", "MUSIC VIDEOS", "DOCUMENTARY", "SOCIAL CONTENT", "Wedding Invitation's"];
+const categories = ["ALL", "BRAND FILMS", "MUSIC VIDEOS", "DOCUMENTARY", "SOCIAL CONTENT", "Wedding Invitations"];
 
 function ProjectCard({ project, featured, onOpen }) {
    const previewRef = useRef(null);
