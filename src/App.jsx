@@ -7,11 +7,31 @@ import Work from "./components/Work";
 import About from "./components/About";
 import Contact from "./components/Contact";
 import Footer from "./components/Footer";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, useLocation } from "react-router-dom";
 import AllWork from "./components/AllWork";
 import FullExperience from "./components/FullExperience";
+import { useEffect } from "react";
 
 function App() {
+   const location = useLocation();
+
+   useEffect(() => {
+      if (location.hash) {
+         const timer = setTimeout(() => {
+            const section = document.getElementById(location.hash.slice(1));
+
+            section?.scrollIntoView({
+               behavior: "smooth",
+               block: "start",
+            });
+         }, 300);
+
+         return () => clearTimeout(timer);
+      } else {
+         window.scrollTo(0, 0);
+      }
+   }, [location.pathname, location.hash]);
+
    return (
       <Routes>
          <Route
@@ -27,8 +47,8 @@ function App() {
                      <Work />
                      <About />
                      <Contact />
-                     <Footer />
                   </main>
+                  <Footer />
                </div>
             }
          />

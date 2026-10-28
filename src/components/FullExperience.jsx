@@ -1,3 +1,7 @@
+import { FaApple } from "react-icons/fa";
+import { TbBrandAdobePremiere, TbBrandAdobeAfterEffect, TbBrandAdobePhotoshop, TbBrandAdobeIllustrator } from "react-icons/tb";
+import { SiDavinciresolve } from "react-icons/si";
+
 const experienceHighlights = [
    "Edited 100+ videos across technology, fashion, education, and lifestyle.",
    "Created short-form and long-form content for Instagram, LinkedIn, YouTube, and Facebook.",
@@ -7,6 +11,17 @@ const experienceHighlights = [
    "Performed professional colour correction, colour grading, and audio mixing.",
    "Produced promotional, corporate, and event highlight videos.",
    "Managed the complete post-production workflow, from footage organization to final delivery.",
+];
+
+const moviePromotionHighlights = [
+   "Edited cinematic movie trailers that capture a film’s essence and build anticipation among audiences.",
+   "Created song promos highlighting memorable scenes and music to generate excitement around film releases.",
+   "Produced animated motion posters using typography, visual effects, and movement to bring film artwork to life.",
+   "Created digital promotional ads to increase film visibility and engage audiences across online platforms.",
+   "Adapted marketing assets into multiple formats, aspect ratios, and durations for different digital platforms.",
+   "Worked on film promotion campaigns from initial asset creation to final delivery, maintaining visual consistency across materials.",
+   "Used colour grading, sound design, transitions, and motion graphics to create polished, engaging promotional content.",
+   "Managed revisions and multiple promotional deliverables while maintaining quality and meeting campaign deadlines.",
 ];
 
 const specialties = [
@@ -20,14 +35,47 @@ const specialties = [
    "Brand Films",
 ];
 
-const tools = ["Adobe Premiere Pro", "Adobe After Effects", "DaVinci Resolve", "Final Cut Pro", "Adobe Photoshop", "Adobe Illustrator"];
+const tools = [
+   {
+      name: "Adobe Premiere Pro",
+      Icon: TbBrandAdobePremiere,
+      color: "#9999FF",
+   },
+   {
+      name: "Adobe After Effects",
+      Icon: TbBrandAdobeAfterEffect,
+      color: "#9999FF",
+   },
+   {
+      name: "DaVinci Resolve",
+      Icon: SiDavinciresolve,
+      color: "#D8B66B",
+   },
+   {
+      name: "Final Cut Pro",
+      Icon: FaApple,
+      color: "#E7C15F",
+   },
+   {
+      name: "Adobe Photoshop",
+      Icon: TbBrandAdobePhotoshop,
+      color: "#31A8FF",
+   },
+   {
+      name: "Adobe Illustrator",
+      Icon: TbBrandAdobeIllustrator,
+      color: "#FF9A00",
+   },
+];
 
 function SectionLabel({ number, children }) {
    return (
       <div className='mb-5 flex items-center gap-3'>
          <span className='font-mono text-xs tracking-widest text-[#D8B66B]'>{number}</span>
+
          <span className='h-px w-10 bg-[#D8B66B]/60' />
-         <span className='font-mono text-[10px] uppercase tracking-[0.25em] text-[#A5A098]'>{children}</span>
+
+         <div className='font-mono text-[10px] uppercase tracking-[0.25em] text-[#A5A098]'>{children}</div>
       </div>
    );
 }
@@ -36,7 +84,7 @@ export default function FullExperience() {
    return (
       <main className='min-h-screen overflow-hidden bg-[#0C0C0C] text-[#F0EDE6]'>
          {/* HERO */}
-         <section className='relative px-5 pb-20 pt-28 sm:px-10 lg:px-20 lg:pb-28 lg:pt-36'>
+         <section className='relative px-5 pb-20 pt-16 sm:px-10 lg:px-20 lg:pb-28 lg:pt-36'>
             <div
                aria-hidden='true'
                className='pointer-events-none absolute right-0 top-20 h-72 w-72 rounded-full bg-[#D8B66B]/[0.06] blur-[100px]'
@@ -47,20 +95,20 @@ export default function FullExperience() {
 
                <div className='grid items-end gap-12 lg:grid-cols-[1.3fr_0.7fr]'>
                   <div>
-                     <p className='mb-5 font-mono text-[10px] uppercase tracking-[0.3em] text-[#D8B66B]'>Video Editor · Bengaluru, India</p>
+                     <h1 className='max-w-2xl font-serif text-5xl leading-[1.08] sm:text-5xl lg:text-6xl'>HI, I’M ABHISHEK</h1>
 
-                     <h1 className='max-w-4xl font-serif text-5xl leading-[1.08] sm:text-6xl lg:text-8xl'>
-                        Every story
-                        <br />
-                        deserves the
-                        <br />
-                        <span className='italic text-[#D8B66B]'>right cut.</span>
-                     </h1>
-
-                     <p className='mt-8 max-w-xl text-sm leading-8 text-[#B8B5AE] sm:text-base'>
-                        I’m Abhishek, a video editor passionate about transforming raw footage into meaningful visual stories. I work with
-                        pacing, colour, sound, and motion to create edits that connect with people and bring ideas to life.
+                     <p className='mt-8 text-sm leading-8 text-[#B8B5AE] sm:text-base'>
+                        I’m a video editor with <strong className='font-semibold text-[#D8B66A]'>5 years of experience</strong> crafting
+                        compelling visual stories for brands, businesses, and digital platforms. At Artsylens, I worked on projects for{" "}
+                        <strong className='font-semibold text-[#D8B66A]'>leading IT companies</strong> and{" "}
+                        <strong className='font-semibold text-[#D8B66A]'>corporate events</strong>, alongside promotional films, social
+                        media content, and weddings. With a strong eye for{" "}
+                        <strong className='font-semibold text-[#D8B66A]'>pacing, colour grading, sound design, and motion graphics</strong>,
+                        I transform raw footage into polished, impactful videos that communicate ideas, capture attention, and leave a
+                        lasting impression. For me, every edit is an opportunity to bring a story to life with purpose and creativity.
                      </p>
+
+                     <p className='mb-5 pt-8 font-mono text-sm tracking-wide text-[#D8B66B]'>Bengaluru, India</p>
 
                      <a
                         href='/#contact'
@@ -83,7 +131,9 @@ export default function FullExperience() {
                               <br />
                               of the edit.
                            </p>
+
                            <div className='mt-6 h-px w-16 bg-[#D8B66B]' />
+
                            <p className='mt-5 max-w-[230px] text-xs leading-6 text-[#A5A098]'>
                               Understanding the story. Finding the rhythm. Making every frame count.
                            </p>
@@ -91,24 +141,10 @@ export default function FullExperience() {
 
                         <div className='flex items-end justify-between'>
                            <span className='font-mono text-[9px] tracking-[0.2em] text-[#A5A098]'>STORY · RHYTHM · EMOTION</span>
+
                            <span className='text-2xl text-[#D8B66B]'>✳</span>
                         </div>
                      </div>
-                  </div>
-               </div>
-
-               <div className='mt-16 grid grid-cols-2 gap-6 border-t border-white/10 pt-7 sm:grid-cols-3'>
-                  <div>
-                     <p className='font-serif text-4xl text-[#D8B66B]'>100+</p>
-                     <p className='mt-2 font-mono text-[9px] uppercase tracking-[0.18em] text-[#A5A098]'>Videos Edited</p>
-                  </div>
-                  <div>
-                     <p className='font-serif text-4xl text-[#D8B66B]'>2022</p>
-                     <p className='mt-2 font-mono text-[9px] uppercase tracking-[0.18em] text-[#A5A098]'>Artsylens Since</p>
-                  </div>
-                  <div className='col-span-2 sm:col-span-1'>
-                     <p className='font-serif text-4xl text-[#D8B66B]'>8+</p>
-                     <p className='mt-2 font-mono text-[9px] uppercase tracking-[0.18em] text-[#A5A098]'>Creative Specialties</p>
                   </div>
                </div>
             </div>
@@ -134,26 +170,31 @@ export default function FullExperience() {
                   </div>
 
                   <div className='border-l border-[#D8B66B]/40 pl-6 sm:pl-9'>
+                     {/* ARTSYLENS */}
                      <div className='relative'>
                         <span className='absolute -left-[30px] top-1 h-3 w-3 rounded-full border-2 border-[#D8B66B] bg-[#111110] sm:-left-[43px]' />
 
                         <div className='flex flex-wrap items-start justify-between gap-4'>
                            <div>
                               <p className='font-mono text-[10px] uppercase tracking-[0.2em] text-[#D8B66B]'>Full-time · On-site</p>
+
                               <h3 className='mt-3 font-serif text-3xl'>Video Editor</h3>
+
                               <p className='mt-2 text-sm text-[#C7C3BA]'>Artsylens</p>
+
                               <p className='mt-2 text-xs text-[#8E8A83]'>Bengaluru, Karnataka, India</p>
                            </div>
 
                            <span className='border border-[#D8B66B]/40 px-3 py-2 font-mono text-[9px] uppercase tracking-wider text-[#D8B66B]'>
-                              Mar 2022 – Present
+                              Mar 2022 – July 2026
                            </span>
                         </div>
 
-                        <div className='mt-8 space-y-4'>
+                        <div className='mt-8 space-y-2'>
                            {experienceHighlights.map((highlight, index) => (
                               <div key={highlight} className='flex gap-4'>
                                  <span className='mt-1 font-mono text-[10px] text-[#D8B66B]'>{String(index + 1).padStart(2, "0")}</span>
+
                                  <p className='text-sm leading-7 text-[#B8B5AE]'>{highlight}</p>
                               </div>
                            ))}
@@ -165,7 +206,49 @@ export default function FullExperience() {
                            rel='noreferrer'
                            className='mt-8 inline-flex items-center gap-3 font-mono text-[10px] uppercase tracking-[0.15em] text-[#D8B66B] transition-colors hover:text-[#F0EDE6]'
                         >
-                           VIEW COMPANY PROFILE <span aria-hidden='true'>↗</span>
+                           VIEW COMPANY PROFILE
+                           <span aria-hidden='true'>↗</span>
+                        </a>
+                     </div>
+
+                     {/* FILMYCULTS */}
+                     <div className='relative pt-10'>
+                        <span className='absolute -left-[30px] top-11 h-3 w-3 rounded-full border-2 border-[#D8B66B] bg-[#111110] sm:-left-[43px]' />
+
+                        <div className='flex flex-wrap items-start justify-between gap-4'>
+                           <div>
+                              <p className='font-mono text-[10px] uppercase tracking-[0.2em] text-[#D8B66B]'>Full-time · On-site</p>
+
+                              <h3 className='mt-3 font-serif text-3xl'>Video Editor</h3>
+
+                              <p className='mt-2 text-sm text-[#C7C3BA]'>FilmyCults</p>
+
+                              <p className='mt-2 text-xs text-[#8E8A83]'>Bengaluru, Karnataka, India</p>
+                           </div>
+
+                           <span className='border border-[#D8B66B]/40 px-3 py-2 font-mono text-[9px] uppercase tracking-wider text-[#D8B66B]'>
+                              Aug 2026 – Present
+                           </span>
+                        </div>
+
+                        <div className='mt-8 space-y-2'>
+                           {moviePromotionHighlights.map((highlight, index) => (
+                              <div key={highlight} className='flex gap-4'>
+                                 <span className='mt-1 font-mono text-[10px] text-[#D8B66B]'>{String(index + 1).padStart(2, "0")}</span>
+
+                                 <p className='text-sm leading-7 text-[#B8B5AE]'>{highlight}</p>
+                              </div>
+                           ))}
+                        </div>
+
+                        <a
+                           href='https://www.linkedin.com/company/90522180/'
+                           target='_blank'
+                           rel='noreferrer'
+                           className='mt-8 inline-flex items-center gap-3 font-mono text-[10px] uppercase tracking-[0.15em] text-[#D8B66B] transition-colors hover:text-[#F0EDE6]'
+                        >
+                           VIEW COMPANY PROFILE
+                           <span aria-hidden='true'>↗</span>
                         </a>
                      </div>
                   </div>
@@ -219,7 +302,8 @@ export default function FullExperience() {
                         rel='noreferrer'
                         className='mt-7 inline-flex items-center gap-3 font-mono text-[10px] uppercase tracking-[0.15em] text-[#D8B66B] transition-colors hover:text-[#F0EDE6]'
                      >
-                        VIEW INSTITUTION <span aria-hidden='true'>↗</span>
+                        VIEW INSTITUTION
+                        <span aria-hidden='true'>↗</span>
                      </a>
                   </div>
                </div>
@@ -238,6 +322,7 @@ export default function FullExperience() {
                         <br />
                         <span className='italic text-[#D8B66B]'>every frame.</span>
                      </h2>
+
                      <p className='mt-6 text-sm leading-7 text-[#A5A098]'>
                         A combination of creative instinct and technical execution, built around what each story needs.
                      </p>
@@ -250,6 +335,7 @@ export default function FullExperience() {
                            className='group flex items-center justify-between border-b border-white/10 py-5 transition-colors hover:border-[#D8B66B]/60'
                         >
                            <span className='font-serif text-xl transition-colors group-hover:text-[#D8B66B] sm:text-2xl'>{specialty}</span>
+
                            <span className='font-mono text-[10px] text-[#D8B66B]'>{String(index + 1).padStart(2, "0")}</span>
                         </div>
                      ))}
@@ -258,7 +344,7 @@ export default function FullExperience() {
             </div>
          </section>
 
-         {/* TOOLS */}
+         {/* TOOLS — TECHNOLOGY SERVES THE STORY */}
          <section className='px-5 py-20 sm:px-10 lg:px-20 lg:py-24'>
             <div className='mx-auto max-w-7xl'>
                <SectionLabel number='05'>TOOLS OF THE TRADE</SectionLabel>
@@ -270,37 +356,27 @@ export default function FullExperience() {
                </p>
 
                <div className='mt-10 grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-6'>
-                  {tools.map((tool, index) => (
+                  {tools.map(({ name, Icon, color }, index) => (
                      <div
-                        key={tool}
-                        className='flex min-h-32 flex-col justify-between border border-white/10 bg-[#111110] p-4 transition-all duration-300 hover:border-[#D8B66B]/60 hover:bg-[#171715] sm:p-5'
+                        key={name}
+                        className='group flex min-h-36 flex-col justify-between border border-white/10 bg-[#111110] p-4 transition-all duration-300 hover:border-[#D8B66B]/60 hover:bg-[#171715] sm:p-5'
                      >
-                        <span className='font-mono text-[10px] text-[#D8B66B]'>0{index + 1}</span>
-                        <span className='text-sm leading-6 text-[#F0EDE6]'>{tool}</span>
+                        <div className='flex items-start justify-between gap-2'>
+                           <span className='font-mono text-[10px] text-[#D8B66B]'>{String(index + 1).padStart(2, "0")}</span>
+
+                           <Icon
+                              aria-hidden='true'
+                              className='text-3xl transition-transform duration-300 group-hover:scale-110'
+                              style={{ color }}
+                           />
+                        </div>
+
+                        <span className='mt-5 text-sm leading-6 text-[#F0EDE6]'>{name}</span>
                      </div>
                   ))}
                </div>
             </div>
          </section>
-
-         {/* CREATIVE PHILOSOPHY */}
-         <section className='px-5 pb-24 pt-8 sm:px-10 lg:px-20 lg:pb-32'>
-            <div className='mx-auto max-w-5xl border-y border-[#D8B66B]/40 py-12 text-center sm:py-16'>
-               <SectionLabel number='06'>THE CREATIVE PHILOSOPHY</SectionLabel>
-
-               <h2 className='font-serif text-4xl leading-tight sm:text-6xl lg:text-7xl'>
-                  Understand the story.
-                  <br />
-                  <span className='italic text-[#D8B66B]'>Let the edit speak.</span>
-               </h2>
-
-               <p className='mx-auto mt-7 max-w-2xl text-sm leading-8 text-[#A5A098]'>
-                  Every project begins with listening, understanding the intention, and finding the emotion at its centre. The edit should
-                  never distract from the story. It should make the story impossible to forget.
-               </p>
-            </div>
-         </section>
-
          {/* CONTACT CTA */}
          <section className='border-t border-white/10 bg-[#111110] px-5 py-20 text-center sm:px-10 lg:py-24'>
             <div className='mx-auto max-w-3xl'>
@@ -320,7 +396,8 @@ export default function FullExperience() {
                   href='/#contact'
                   className='mt-9 inline-flex items-center gap-4 bg-[#D8B66B] px-7 py-4 font-mono text-[10px] font-semibold uppercase tracking-[0.2em] text-[#0C0C0C] transition-colors hover:bg-[#F0EDE6]'
                >
-                  GET IN TOUCH <span aria-hidden='true'>↗</span>
+                  GET IN TOUCH
+                  <span aria-hidden='true'>↗</span>
                </a>
             </div>
          </section>
