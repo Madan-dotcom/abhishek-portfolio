@@ -1,9 +1,11 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+
 import { FaPlay, FaTimes, FaChevronLeft, FaChevronRight, FaVolumeUp, FaVolumeMute, FaArrowLeft } from "react-icons/fa";
 
 import haldi from "../assets/videos/Haldi Teaser.mp4";
 import reel2 from "../assets/videos/Anvik Eshan.mp4";
 
+// PROJECT DATA
 const projects = [
    {
       id: 1,
@@ -53,8 +55,19 @@ const projects = [
    },
 ];
 
-const categories = ["ALL", "BRAND FILMS", "MUSIC VIDEOS", "DOCUMENTARY", "SOCIAL CONTENT"];
+// CATEGORY FILTERS
+const categories = [
+   "ALL",
+   "BRAND FILMS",
+   "MUSIC VIDEOS",
+   "DOCUMENTARY",
+   "SOCIAL CONTENT",
+   "REELS",
+   "WEDDING INVITATIONS",
+   " CORPORATE VIDEOS",
+];
 
+// PROJECT CARD
 function ProjectCard({ project, index, onOpen }) {
    const previewRef = useRef(null);
 
@@ -75,8 +88,17 @@ function ProjectCard({ project, index, onOpen }) {
    };
 
    return (
-      <article className='group min-w-0 animate-[allWorkFadeIn_400ms_ease_both]' style={{ animationDelay: `${Math.min(index, 5) * 45}ms` }}>
-         <div className='relative aspect-[1.58/1] overflow-hidden bg-[#111111]' onMouseEnter={startPreview} onMouseLeave={stopPreview}>
+      <article
+         className='group min-w-0 animate-[allWorkFadeIn_400ms_ease_both]'
+         style={{
+            animationDelay: `${Math.min(index, 5) * 45}ms`,
+         }}
+      >
+         <div
+            className={`relative ${project.category === "REELS" ? "aspect-[9/16]" : "aspect-[1.58/1]"} overflow-hidden bg-[#111111]`}
+            onMouseEnter={startPreview}
+            onMouseLeave={stopPreview}
+         >
             <video
                ref={previewRef}
                src={project.video}
@@ -138,6 +160,7 @@ function ProjectCard({ project, index, onOpen }) {
    );
 }
 
+// PROJECT VIEWER
 function ProjectViewer({ project, onClose, onPrevious, onNext }) {
    const videoRef = useRef(null);
    const [muted, setMuted] = useState(false);
@@ -147,6 +170,7 @@ function ProjectViewer({ project, onClose, onPrevious, onNext }) {
       if (!video) return;
 
       video.muted = false;
+
       video.play().catch(() => {
          // Visitors can press Play if the browser blocks autoplay.
       });
@@ -166,7 +190,9 @@ function ProjectViewer({ project, onClose, onPrevious, onNext }) {
             <div className='mb-5 flex items-start justify-between gap-4'>
                <div>
                   <p className='mb-2 font-mono text-[10px] tracking-[0.25em] text-[#D6B66B]'>
-                     {project.category} <span className='mx-2'>/</span> {project.year}
+                     {project.category}
+                     <span className='mx-2'>/</span>
+                     {project.year}
                   </p>
 
                   <h2 className='font-serif text-2xl text-[#F0EDE6] sm:text-4xl'>{project.title}</h2>
@@ -241,6 +267,7 @@ function ProjectViewer({ project, onClose, onPrevious, onNext }) {
    );
 }
 
+// MAIN ALL WORK PAGE
 export default function AllWork() {
    const [activeCategory, setActiveCategory] = useState("ALL");
    const [selectedProject, setSelectedProject] = useState(null);
@@ -316,6 +343,7 @@ export default function AllWork() {
             <header className='mb-14'>
                <div className='mb-3 flex items-center gap-[18px]'>
                   <span className='h-[39px] w-[39px] shrink-0 rounded-full border border-[#D6B66B]/60' />
+
                   <p className='font-mono text-[11px] tracking-[0.28em] text-[#D6B66B]'>THE COMPLETE COLLECTION</p>
                </div>
 
@@ -348,6 +376,7 @@ export default function AllWork() {
 
             <div className='mb-6 flex items-center justify-between border-b border-white/[0.08] pb-4'>
                <p className='font-mono text-[10px] tracking-[0.18em] text-white/40'>PROJECT ARCHIVE</p>
+
                <p className='font-mono text-[10px] tracking-[0.18em] text-[#D6B66B]'>
                   {String(filteredProjects.length).padStart(2, "0")} PROJECTS
                </p>
@@ -382,6 +411,7 @@ export default function AllWork() {
             opacity: 0;
             transform: translateY(10px);
           }
+
           to {
             opacity: 1;
             transform: translateY(0);

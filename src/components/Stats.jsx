@@ -1,6 +1,6 @@
 const stats = [
    { value: "85+", label: "Projects Completed" },
-   { value: "5yr", label: "Experience" },
+   { value: "5+yr", label: "Experience" },
    { value: "48+", label: "Clients Served" },
    { value: "4K", label: "Max Resolution" },
 ];

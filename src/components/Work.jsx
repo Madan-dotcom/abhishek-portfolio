@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import haldi from "../assets/videos/Haldi Teaser.mp4";
 import reel2 from "../assets/videos/Anvik Eshan.mp4";
 
+// PROJECT DATA
 const projects = [
    {
       id: 1,
@@ -28,7 +29,7 @@ const projects = [
    {
       id: 3,
       title: "FitLife — Reels Series",
-      category: "SOCIAL CONTENT",
+      category: "REELS",
       year: "2024",
       duration: "Series",
       role: "Editing",
@@ -54,39 +55,47 @@ const projects = [
    },
 ];
 
-const categories = ["ALL", "BRAND FILMS", "MUSIC VIDEOS", "DOCUMENTARY", "SOCIAL CONTENT", "Wedding Invitations"];
+// CATEGORY FILTERS
+const categories = [
+   "ALL",
+   "BRAND FILMS",
+   "MUSIC VIDEOS",
+   "DOCUMENTARY",
+   "SOCIAL CONTENT",
+   "REELS",
+   "WEDDING INVITATIONS",
+   "CORPORATE VIDEOS",
+];
 
+// PROJECT CARD
 function ProjectCard({ project, featured, onOpen }) {
    const previewRef = useRef(null);
-   const [previewPlaying, setPreviewPlaying] = useState(false);
 
    const startPreview = () => {
       const video = previewRef.current;
+
       if (!video) return;
 
       video.muted = true;
-      video
-         .play()
-         .then(() => setPreviewPlaying(true))
-         .catch(() => {});
+      video.play().catch(() => {});
    };
 
    const stopPreview = () => {
       const video = previewRef.current;
+
       if (!video) return;
 
       video.pause();
       video.currentTime = 0;
-      setPreviewPlaying(false);
    };
+
+   // REELS USE 9:16
+   // ALL OTHER PROJECTS KEEP THEIR ORIGINAL ASPECT RATIOS
+   const aspectRatio = project.category === "REELS" ? "aspect-[9/16]" : featured ? "aspect-[1.28/1]" : "aspect-[1.58/1]";
 
    return (
       <article className='group min-w-0 bg-[#0B0B0B]'>
-         <div
-            className={`relative overflow-hidden bg-[#111111] ${featured ? "aspect-[1.28/1]" : "aspect-[1.58/1]"}`}
-            onMouseEnter={startPreview}
-            onMouseLeave={stopPreview}
-         >
+         <div className={`relative overflow-hidden bg-[#111111] ${aspectRatio}`} onMouseEnter={startPreview} onMouseLeave={stopPreview}>
             <video
                ref={previewRef}
                src={project.video}
@@ -99,7 +108,6 @@ function ProjectCard({ project, featured, onOpen }) {
                   if (previewRef.current) {
                      previewRef.current.currentTime = 0;
                   }
-                  setPreviewPlaying(false);
                }}
                onClick={() => onOpen(project)}
             />
@@ -112,18 +120,24 @@ function ProjectCard({ project, featured, onOpen }) {
                onClick={() => onOpen(project)}
                className='absolute left-1/2 top-1/2 flex h-12 w-12 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border border-white/60 bg-black/35 text-white backdrop-blur-sm transition-all duration-300 hover:border-[#D6B66B] hover:bg-[#D6B66B] hover:text-black group-hover:scale-105'
             >
-               {previewPlaying ? <FaPlay className='ml-0.5 text-xs' /> : <FaPlay className='ml-0.5 text-xs' />}
+               <FaPlay className='ml-0.5 text-xs' />
             </button>
 
             <span className='pointer-events-none absolute left-4 top-4 font-mono text-[9px] tracking-[0.2em] text-white/70 opacity-0 transition-opacity group-hover:opacity-100'>
                PROJECT / {String(project.id).padStart(2, "0")}
             </span>
+
+            {project.category === "REELS" && (
+               <span className='pointer-events-none absolute right-3 top-3 border border-white/30 bg-black/50 px-2 py-1 font-mono text-[9px] tracking-widest text-white'>
+                  9:16
+               </span>
+            )}
          </div>
 
          <div className='min-h-[124px] border-b border-white/[0.03] px-6 py-5 transition-colors duration-300 group-hover:bg-white/[0.025] max-sm:px-3'>
             <p
                className={`mb-3 font-mono text-[10px] tracking-[0.2em] ${
-                  project.category === "BRAND FILMS" ? "text-[#D6B66B]" : "text-[#77736D]"
+                  project.category === "BRAND FILMS" ? "text-[#D6B66B]" : project.category === "REELS" ? "text-[#D6B66B]" : "text-[#77736D]"
                }`}
             >
                {project.category === "BRAND FILMS" ? "BRAND FILM" : project.category === "MUSIC VIDEOS" ? "MUSIC VIDEO" : project.category}
@@ -147,15 +161,18 @@ function ProjectCard({ project, featured, onOpen }) {
    );
 }
 
+// FULL-SCREEN PROJECT VIEWER
 function ProjectViewer({ project, onClose, onPrevious, onNext }) {
    const videoRef = useRef(null);
    const [muted, setMuted] = useState(false);
 
    useEffect(() => {
       const video = videoRef.current;
+
       if (!video) return;
 
       video.muted = false;
+
       video.play().catch(() => {
          // If autoplay with sound is blocked, the visitor can press Play.
       });
@@ -175,11 +192,17 @@ function ProjectViewer({ project, onClose, onPrevious, onNext }) {
             <div className='mb-4 flex items-start justify-between gap-4'>
                <div>
                   <p className='mb-2 font-mono text-[10px] tracking-[0.25em] text-[#D6B66B]'>
-                     {project.category} <span className='mx-2'>/</span> {project.year}
+                     {project.category}
+                     <span className='mx-2'>/</span>
+                     {project.year}
                   </p>
+
                   <h3 className='font-serif text-2xl text-[#F0EDE6] sm:text-4xl'>{project.title}</h3>
+
                   <p className='mt-2 text-sm text-white/50'>
-                     {project.role} <span className='mx-2'>·</span> {project.duration}
+                     {project.role}
+                     <span className='mx-2'>·</span>
+                     {project.duration}
                   </p>
                </div>
 
@@ -202,7 +225,7 @@ function ProjectViewer({ project, onClose, onPrevious, onNext }) {
                   autoPlay
                   playsInline
                   preload='auto'
-                  className='max-h-[68vh] w-full object-contain'
+                  className={`mx-auto max-h-[68vh] w-full object-contain ${project.category === "REELS" ? "max-w-[420px]" : ""}`}
                   onVolumeChange={(event) => setMuted(event.currentTarget.muted)}
                />
             </div>
@@ -220,7 +243,9 @@ function ProjectViewer({ project, onClose, onPrevious, onNext }) {
                   type='button'
                   onClick={() => {
                      const video = videoRef.current;
+
                      if (!video) return;
+
                      video.muted = !video.muted;
                      setMuted(video.muted);
                   }}
@@ -243,11 +268,17 @@ function ProjectViewer({ project, onClose, onPrevious, onNext }) {
    );
 }
 
+// MAIN WORK SECTION
 export default function Work() {
    const [activeCategory, setActiveCategory] = useState("ALL");
    const [selectedProject, setSelectedProject] = useState(null);
+
+   // ALL hides REELS; selecting REELS shows only REELS projects.
    const filteredProjects = useMemo(
-      () => (activeCategory === "ALL" ? projects : projects.filter((project) => project.category === activeCategory)),
+      () =>
+         activeCategory === "ALL"
+            ? projects.filter((project) => project.category !== "REELS")
+            : projects.filter((project) => project.category === activeCategory),
       [activeCategory],
    );
 
@@ -260,18 +291,20 @@ export default function Work() {
    }, []);
 
    const showPrevious = useCallback(() => {
-      if (!selectedProject) return;
+      if (!selectedProject || filteredProjects.length === 0) return;
 
       const index = filteredProjects.findIndex((project) => project.id === selectedProject.id);
+
       const previousIndex = (index - 1 + filteredProjects.length) % filteredProjects.length;
 
       setSelectedProject(filteredProjects[previousIndex]);
    }, [selectedProject, filteredProjects]);
 
    const showNext = useCallback(() => {
-      if (!selectedProject) return;
+      if (!selectedProject || filteredProjects.length === 0) return;
 
       const index = filteredProjects.findIndex((project) => project.id === selectedProject.id);
+
       const nextIndex = (index + 1) % filteredProjects.length;
 
       setSelectedProject(filteredProjects[nextIndex]);
@@ -281,6 +314,7 @@ export default function Work() {
       if (!selectedProject) return;
 
       const previousOverflow = document.body.style.overflow;
+
       document.body.style.overflow = "hidden";
 
       const handleKeyDown = (event) => {
@@ -301,8 +335,7 @@ export default function Work() {
       setActiveCategory(category);
    };
 
-   // Keep the reference layout: a 7/12 featured card, a 5/12 card,
-   // then three equal cards. All projects are displayed without Load More.
+   // ORIGINAL FEATURED LAYOUT IS PRESERVED FOR ALL PROJECTS
    const featuredLayout = activeCategory === "ALL";
 
    return (
@@ -311,6 +344,7 @@ export default function Work() {
             <header className='mb-11'>
                <div className='mb-2 flex items-center gap-[18px]'>
                   <span className='h-[39px] w-[39px] shrink-0 rounded-full border border-[#D6B66B]/60' />
+
                   <p className='font-mono text-[11px] tracking-[0.28em] text-[#D6B66B]'>SELECTED PROJECTS</p>
                </div>
 
@@ -318,6 +352,7 @@ export default function Work() {
                   Recent <span className='italic text-[#D6B66B]'>Work</span>
                </h2>
 
+               {/* CATEGORY FILTERS */}
                <div className='flex flex-wrap gap-[10px] sm:ml-[56px]'>
                   {categories.map((category) => (
                      <button
@@ -337,6 +372,7 @@ export default function Work() {
                </div>
             </header>
 
+            {/* PROJECT GRID */}
             <div
                key={activeCategory}
                className={`grid grid-cols-1 items-start gap-y-8 sm:gap-y-0 ${
@@ -353,25 +389,38 @@ export default function Work() {
                         className={`min-w-0 animate-[workFadeIn_400ms_ease_both] ${
                            featuredLayout ? (featured ? "sm:col-span-7" : secondFeatured ? "sm:col-span-5" : "sm:col-span-4") : ""
                         }`}
-                        style={{ animationDelay: `${Math.min(index, 5) * 45}ms` }}
+                        style={{
+                           animationDelay: `${Math.min(index, 5) * 45}ms`,
+                        }}
                      >
                         <ProjectCard project={project} featured={featured} onOpen={openProject} />
                      </div>
                   );
                })}
+
+               {/* EMPTY CATEGORY MESSAGE */}
+               {filteredProjects.length === 0 && (
+                  <div className='col-span-full py-16 text-center'>
+                     <p className='font-serif text-2xl text-[#F0EDE6]'>More projects coming soon.</p>
+
+                     <p className='mt-3 font-mono text-[10px] tracking-[0.2em] text-[#77736D]'>CHECK BACK LATER</p>
+                  </div>
+               )}
             </div>
+
+            {/* MORE PROJECTS BUTTON */}
             <div className='mt-14 flex w-full justify-end'>
                <Link
                   to='/all-work'
-                  className='inline-flex items-center justify-center gap-3 border border-[#D6B66B]/60 px-7 py-4 font-mono text-[10px]
-                   tracking-[0.2em] text-[#D6B66B] transition-all duration-300 hover:bg-[#D6B66B] hover:text-black focus-visible:outline
-                    focus-visible:outline-2 focus-visible:outline-[#D6B66B]'
+                  className='inline-flex items-center justify-center gap-3 border border-[#D6B66B]/60 px-7 py-4 font-mono text-[10px] tracking-[0.2em] text-[#D6B66B] transition-all duration-300 hover:bg-[#D6B66B] hover:text-black focus-visible:outline focus-visible:outline-2 focus-visible:outline-[#D6B66B]'
                >
-                  MORE PROJECTS <span aria-hidden='true'>↗</span>
+                  MORE PROJECTS
+                  <span aria-hidden='true'>↗</span>
                </Link>
             </div>
          </div>
 
+         {/* VIDEO VIEWER */}
          {selectedProject && <ProjectViewer project={selectedProject} onClose={closeProject} onPrevious={showPrevious} onNext={showNext} />}
 
          <style>{`
@@ -380,6 +429,7 @@ export default function Work() {
             opacity: 0;
             transform: translateY(10px);
           }
+
           to {
             opacity: 1;
             transform: translateY(0);
