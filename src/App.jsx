@@ -11,6 +11,7 @@ import { Routes, Route, useLocation } from "react-router-dom";
 import AllWork from "./components/AllWork";
 import FullExperience from "./components/FullExperience";
 import { useEffect } from "react";
+import Intro from "./components/Intro";
 
 function App() {
    const location = useLocation();
@@ -40,6 +41,7 @@ function App() {
                <div>
                   <Navbar />
                   <main>
+                     <Intro />
                      <Hero />
                      <Stats />
                      <Tools />
@@ -52,9 +54,7 @@ function App() {
                </div>
             }
          />
-
          <Route path='/all-work' element={<AllWork />} />
-
          <Route path='/about' element={<FullExperience />} />
       </Routes>
    );
