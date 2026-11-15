@@ -2,7 +2,6 @@ import Navbar from "./components/Navbar";
 import Hero from "./components/Hero";
 import Stats from "./components/Stats";
 import Tools from "./components/Tools";
-import Showreel from "./components/Showreel";
 import Work from "./components/Work";
 import About from "./components/About";
 import Contact from "./components/Contact";
@@ -11,7 +10,6 @@ import { Routes, Route, useLocation } from "react-router-dom";
 import AllWork from "./components/AllWork";
 import FullExperience from "./components/FullExperience";
 import { useEffect } from "react";
-import Intro from "./components/Intro";
 
 function App() {
    const location = useLocation();
@@ -41,11 +39,9 @@ function App() {
                <div>
                   <Navbar />
                   <main>
-                     <Intro />
                      <Hero />
                      <Stats />
                      <Tools />
-                     <Showreel />
                      <Work />
                      <About />
                      <Contact />
