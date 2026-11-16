@@ -56,16 +56,7 @@ const projects = [
 ];
 
 // CATEGORY FILTERS
-const categories = [
-   "ALL",
-   "BRAND FILMS",
-   "MUSIC VIDEOS",
-   "DOCUMENTARY",
-   "SOCIAL CONTENT",
-   "REELS",
-   "WEDDING INVITATIONS",
-   "CORPORATE VIDEOS",
-];
+const categories = ["ALL", "WEDDING VIDEOS", "SOCIAL CONTENT", "REELS", "WEDDING INVITATIONS", "CORPORATE VIDEOS"];
 
 // PROJECT CARD
 function ProjectCard({ project, featured, onOpen }) {
@@ -349,7 +340,7 @@ export default function Work() {
                </div>
 
                <h2 className='mb-7 font-serif text-5xl font-bold leading-tight tracking-[-0.045em] sm:ml-[56px] sm:text-[58px]'>
-                  Recent <span className='italic text-[#D6B66B]'>Work</span>
+                  Recent <span className='italic text-[#F4C200]'>Work</span>
                </h2>
 
                {/* CATEGORY FILTERS */}

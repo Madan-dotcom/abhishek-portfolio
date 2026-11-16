@@ -46,7 +46,7 @@ const Hero = () => {
                <h1 className='font-[family-name:var(--font-display)] text-5xl font-bold leading-[0.92] tracking-tight sm:text-7xl md:text-8xl lg:text-[7rem]'>
                   <span className='block'>Every</span>
                   <span className='block pl-8 font-normal italic text-[#85827D] sm:pl-14'>frame is</span>
-                  <span className='block text-[#E7C15F]'>a decision.</span>
+                  <span className='block text-[#F4C200] font-[]'>a decision.</span>
                </h1>
 
                <p className='mt-8 max-w-md border-l-2 border-[#E7C15F] pl-5 text-sm leading-6 text-[#85827D] sm:mt-10'>

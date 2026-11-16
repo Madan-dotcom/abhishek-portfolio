@@ -56,16 +56,7 @@ const projects = [
 ];
 
 // CATEGORY FILTERS
-const categories = [
-   "ALL",
-   "BRAND FILMS",
-   "MUSIC VIDEOS",
-   "DOCUMENTARY",
-   "SOCIAL CONTENT",
-   "REELS",
-   "WEDDING INVITATIONS",
-   " CORPORATE VIDEOS",
-];
+const categories = ["ALL", "WEDDING VIDEOS", "SOCIAL CONTENT", "REELS", "WEDDING INVITATIONS", " CORPORATE VIDEOS"];
 
 // PROJECT CARD
 function ProjectCard({ project, index, onOpen }) {
